@@ -74,7 +74,7 @@ function createCard(data) {
     </div>
 
     <div class="item__content__addButton">
-      <button id="addToCart" onClick="updateCurrentProduct(this.value)" >Add to cart</button>
+      <button id="addToCart" onClick="checkCart()" >Add to cart</button>
     </div>
 
   </div>
@@ -89,7 +89,10 @@ product.insertAdjacentHTML("beforeend", html);
   currentProduct.quantity = document.querySelector("#quantity").value;
    console.log(currentProduct);
  }
+function checkCart(){
+  //check the current product versus the cart content
 
+}
 
  function storeProduct(value) {
   

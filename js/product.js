@@ -10,7 +10,7 @@ const currentProduct = {
   price:0,
   description: '',
   color: '',
-  quantity:0,
+  quantity:1,
   imageUrl: '',
 }
 
@@ -37,6 +37,7 @@ function fillObject(obj) {
 function createCard(data) {
   const product = document.getElementsByClassName("item")[0];
   //console.log(product);
+  console.log(currentProduct);
   const html = `
   <article>
   <div class="item__img">
@@ -69,7 +70,7 @@ function createCard(data) {
 
       <div class="item__content__settings__quantity">
         <label for="itemQuantity">Number of articles (1-100):</label>
-        <input type="number" name="itemQuantity" min="1" max="100" value="0" id="quantity" onchange="updateCurrentProduct(this.value)">
+        <input type="number" name="itemQuantity" min="1" max="100" value="1" id="quantity" onchange="updateCurrentProduct(this.value)">
       </div>
     </div>
 
@@ -87,46 +88,36 @@ product.insertAdjacentHTML("beforeend", html);
  function updateCurrentProduct(val){
   currentProduct.color = document.querySelector("#colors").value;
   currentProduct.quantity = document.querySelector("#quantity").value;
-   console.log(currentProduct);
+  console.log(currentProduct);
  }
+// xx
+//Check current product against existing values; boolean validation to push or update
 function checkCart(){
-  //check the current product versus the cart content
-
-}
-
- function storeProduct(value) {
+  if (currentProduct.color === undefined) {
+    alert('Please pick one color');
+    return 
+    }
+  cartArray.push(currentProduct);
   
-localStorage.setItem('currentProduct', currentProduct);
-// console.log(localStorage.getItem('currentProduct')); 
-//console.log(currentProduct);  
+  let shouldIPush=true;
+  if (cartArray.length===0) {
+    shouldIPush=true;
+  }
+ 
+  for (let i = 0; i < cartArray.length; i++) {
+    if (currentProduct._id === cartArray[i]._id && currentProduct.color===[cartArray[i].color]) {
+      console.log("No Changes made");
+      cartArray[i].quantity=currentProduct.quantity;
+      shouldIPush=false; 
+    }
+    if (shouldIPush){
+      cartArray.push(currentProduct);
+    }
+     syncCart();  
+  }
 }
- storeProduct ();
+function syncCart(){
 
- /*function gather() {
-  let selectedItem = [];
-  let sofa = document.querySelector("#title").innerText;
-  console.log(sofa);
-  selectedItem.push("_id", "name", "price", "imageUrl", "altTxt", "colors", "quantity");//pull data instead?
-  console.log(selectedItem);
-    
- }
- */
-
-  /* selectedItem.push("_id", "name", "price", "imageUrl", "altTxt", "colors", "quantity");
-    console.log(selectedItem);
-    
-    function gather(data) {
-        let sofa= [];
-        document.querySelector("_id", "name", "price", "imageUrl", "altTxt", "colors", "quantity");
-        data= JSON.stringify(data);
-        sofa = JSON.parse(data);
-        console.log(sofa);
-    }*/
-   //"_id".value, "name".value, "price".value, "imageUrl".value, "altTxt".value, "colors".value, "itemQuantity".value
-    
-// TODO
-
-// Catch values from Html
-// Pass array values to function that stores choosen  customized item to localStorage
-
-// "_id".value, "name".value, "price".value, "imageUrl".value, "altTxt".value, "colors".value, "itemQuantity".value
+ cartString=JSON.stringify(cartArray);
+ localStorage.setItem('cart', cartString);
+};

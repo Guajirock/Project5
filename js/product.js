@@ -37,7 +37,7 @@ function fillObject(obj) {
 function createCard(data) {
   const product = document.getElementsByClassName("item")[0];
   //console.log(product);
-  console.log(currentProduct);
+ // console.log(currentProduct);
   const html = `
   <article>
   <div class="item__img">
@@ -88,36 +88,34 @@ product.insertAdjacentHTML("beforeend", html);
  function updateCurrentProduct(val){
   currentProduct.color = document.querySelector("#colors").value;
   currentProduct.quantity = document.querySelector("#quantity").value;
-  console.log(currentProduct);
+  //console.log(currentProduct);
  }
-// xx
+
 //Check current product against existing values; boolean validation to push or update
 function checkCart(){
   if (currentProduct.color === undefined) {
-    alert('Please pick one color');
-    return 
-    }
-  cartArray.push(currentProduct);
-  
+  alert('Please pick one color');
+  return 
+  }
   let shouldIPush=true;
   if (cartArray.length===0) {
-    shouldIPush=true;
+    shouldIPush=false;
   }
- 
+  console.log(cartArray);
   for (let i = 0; i < cartArray.length; i++) {
     if (currentProduct._id === cartArray[i]._id && currentProduct.color===[cartArray[i].color]) {
-      console.log("No Changes made");
-      cartArray[i].quantity=currentProduct.quantity;
+      cartArray[i].quantity===currentProduct.quantity;
       shouldIPush=false; 
-    }
-    if (shouldIPush){
-      cartArray.push(currentProduct);
-    }
-     syncCart();  
+    }   
   }
+   
+  if (shouldIPush=true){
+    cartArray.push(currentProduct);
+  }
+ 
+   syncCart(); 
 }
 function syncCart(){
-
  cartString=JSON.stringify(cartArray);
  localStorage.setItem('cart', cartString);
 };

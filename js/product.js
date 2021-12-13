@@ -99,23 +99,26 @@ function checkCart(){
   }
   let shouldIPush=true;
   if (cartArray.length===0) {
-    shouldIPush=false;
+    //shouldIPush=true;
   }
   console.log(cartArray);
   for (let i = 0; i < cartArray.length; i++) {
-    if (currentProduct._id === cartArray[i]._id && currentProduct.color===[cartArray[i].color]) {
-      cartArray[i].quantity===currentProduct.quantity;
+    if (currentProduct._id === cartArray[i]._id && currentProduct.color===cartArray[i].color) {
+      cartArray[i].quantity=currentProduct.quantity;
       shouldIPush=false; 
     }   
   }
-   
-  if (shouldIPush=true){
+ 
+   if (shouldIPush){
     cartArray.push(currentProduct);
+    console.log(cartArray,"shouldIPush");
   }
+  //else(updateCurrentProduct.value)
  
    syncCart(); 
 }
 function syncCart(){
+  //console.log(cartArray,"syncCart");
  cartString=JSON.stringify(cartArray);
  localStorage.setItem('cart', cartString);
 };

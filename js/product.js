@@ -106,14 +106,13 @@ function checkCart(){
     if (currentProduct._id === cartArray[i]._id && currentProduct.color===cartArray[i].color) {
       cartArray[i].quantity=currentProduct.quantity;
       shouldIPush=false; 
-    }   
+    }  
   }
- 
+  
    if (shouldIPush){
     cartArray.push(currentProduct);
-    console.log(cartArray,"shouldIPush");
+    //console.log(cartArray,"shouldIPush");
   }
-  //else(updateCurrentProduct.value)
  
    syncCart(); 
 }

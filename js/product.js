@@ -107,13 +107,23 @@ function checkCart(){
     if (currentProduct._id === cartArray[i]._id && currentProduct.color===cartArray[i].color) {
       cartArray[i].quantity===currentProduct.quantity;
       shouldIPush=false; 
-    }   
+    }  
   }
+<<<<<<< HEAD
    if (shouldIPush){
     cartArray.push(currentProduct);
     console.log(cartArray);
   }
    syncCart();  
+=======
+  
+   if (shouldIPush){
+    cartArray.push(currentProduct);
+    //console.log(cartArray,"shouldIPush");
+  }
+ 
+   syncCart(); 
+>>>>>>> 6bcbe04f52eedb13dc38f486a28a8b69f5a696cd
 }
 function syncCart(){
  //console.log(cartArray,"syncCart");

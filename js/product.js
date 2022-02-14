@@ -109,7 +109,6 @@ function checkCart(){
       shouldIPush=false; 
     }   
   }
- 
    if (shouldIPush){
     cartArray.push(currentProduct);
     console.log(cartArray);
